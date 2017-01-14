@@ -18,7 +18,9 @@ public class SodaVTS {
         // Aqui fica a criação dos barcos e a gestão dos barcos que 
         // estão na bacia e os que entram primeiro
         FileManager fm = FileManager.getInstace();
-        fm.getBoatsFromFile();
+        fm.getBoatsFromFile().stream().forEach((ahoy) -> {
+            System.out.println(ahoy);
+        });
     }
     
 }

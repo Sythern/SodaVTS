@@ -7,11 +7,7 @@ package sodavts;
 
 import java.io.IOException;
 import java.nio.file.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.*;
@@ -22,8 +18,6 @@ import java.util.stream.*;
  */
 public final class FileManager {
 
-    //TODO ISTO é para ser um singleton
-    //TODO Finish this shit not done yet cuz Rocha is a Scrub
     private static final FileManager fileManager = new FileManager();
     private final ArrayList<String> boatList;
 
@@ -35,6 +29,11 @@ public final class FileManager {
         return fileManager;
     }
 
+    /**
+     * Método que lê um ficheiro com informações dos barcos
+     * e devolve uma Lista de Barcos
+     * @return Lista de Barcos
+     */
     public ArrayList<Boat> getBoatsFromFile() {
         //TODO Add correction for empty lines
         ArrayList<Boat> boats = new ArrayList<>();
@@ -45,7 +44,10 @@ public final class FileManager {
         }
         return boats;
     }
-
+    
+    /**
+     * Método auxiliar que lê o ficheiro com informações dos barcos
+     */
     private void readFile() {
         
         String fileName = "trafego.txt";
@@ -58,6 +60,10 @@ public final class FileManager {
         }
     }
 
+    /**
+     * Método auxiliar que transforma a string com as horas para a escala de tempo da simulação
+     * @return tempo convertido
+     */
     private int convertStringTime(String time) {
 
         int[] splitTime = new int[2];
@@ -67,6 +73,6 @@ public final class FileManager {
             splitTime[i++] = Integer.parseInt(str);
         }
 
-        return (splitTime[0] * 60 * 60) + (splitTime[1] * 60);
+        return ((splitTime[0] * 60) + (splitTime[1]))/10;
     }
 }
