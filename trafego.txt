@@ -1,0 +1,18 @@
+Not_Disposing_A_Body 03h00 TerminalC 02h00
+
+Not_Disposing_A_BodyA 03h10 TerminalC 02h20
+
+Not_Disposing_A_BodyB 03h20 TerminalC 02h30
+
+Not_Disposing_A_BodyC 03h30 TerminalC 02h40
+
+Cenas 03h40 TerminalP 02h50
+
+CenasD 03h50 TerminalP 02h50
+
+Boaty_McBoat 05h00 Mar 00h30
+
+Duck 06h20 Passeio 01h10
+
+Jorge_Is_Really_Bad 07h00 Marina 02h10
+
