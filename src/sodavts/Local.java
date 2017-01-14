@@ -39,6 +39,10 @@ public class Local {
         return boatQueue;
     }
     
+    /**
+     * Método que faz a gestão das threads (barcos) quando estes entram
+     * @param boatRef Referencia da thread
+     */
     public synchronized void aproach(Boat boatRef) {
         
     }
