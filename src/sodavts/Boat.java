@@ -2,15 +2,17 @@ package sodavts;
 
 /**
  * Classe que caracteriza um barco da aplicação.
+ *
  * @author Diogo Cruz_150221045 e Diogo Rocha_140275059
  */
-public class Boat implements Runnable{
+public class Boat implements Runnable {
+
     private String name;
     private Action action;
     private int arrivalTime, actionDuration, buoyWaitTime, bayWaitTime, exitWaitTime;
     private Thread boatT;
-    
-    public Boat(String name, int arrivalTime, Action action, int actionDuration){
+
+    public Boat(String name, int arrivalTime, Action action, int actionDuration) {
         this.name = name;
         this.action = action;
         this.arrivalTime = arrivalTime;
@@ -19,23 +21,23 @@ public class Boat implements Runnable{
         this.buoyWaitTime = 0;
         this.exitWaitTime = 0;
         this.boatT = new Thread();
-        
+
     }
-    
-    
+
     //Coment this
-    public void startThread(){
+    public void startThread() {
         boatT.start();
     }
-    
+
     //Coment this
     @Override
-    public void run(){
-        
+    public void run() {
+
     }
 
     /**
      * Método que retorna a hora de início da ação de um barco.
+     *
      * @return hora de inicio da ação do barco.
      */
     public int getArrivalTime() {
@@ -44,6 +46,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que define a hora de início da ação de um barco.
+     *
      * @param arrivalTime hora de inicio da ação do barco.
      */
     public void setArrivalTime(int arrivalTime) {
@@ -52,6 +55,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que retorna o tempo que um barco vai efetuar a sua ação.
+     *
      * @return o tempo que o barco vai efetuar a ação.
      */
     public int getActionDuration() {
@@ -60,6 +64,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que define o tempo que um barco vai efetuar a sua ação.
+     *
      * @param actionDuration o tempo que um barco vai efetuar a sua ação.
      */
     public void setActionDuration(int actionDuration) {
@@ -68,6 +73,7 @@ public class Boat implements Runnable{
 
     /**
      * Método retorna o tempo que um barco fica à espera na boia.
+     *
      * @return tempo que o barco fica à espera na boia.
      */
     public int getBuoyWaitTime() {
@@ -76,6 +82,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que define o tempo que um barco fica à espera na boia.
+     *
      * @param buoyWaitTime tempo que o barco fica à espera na boia.
      */
     public void setBuoyWaitTime(int buoyWaitTime) {
@@ -84,6 +91,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que retorna o tempo que o barco fica à espera na bacia.
+     *
      * @return tempo que o barco fica a espera na bacia.
      */
     public int getBayWaitTime() {
@@ -92,6 +100,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que define o tempo que o barco fica à espera na bacia.
+     *
      * @param bayWaitTime tempo que o barco fica à espera na bacia.
      */
     public void setBayWaitTime(int bayWaitTime) {
@@ -100,6 +109,7 @@ public class Boat implements Runnable{
 
     /**
      * Método que retorna o tempo que o barco fica à espera de sair do estuário.
+     *
      * @return tempo que o barco fica à espera de sair do estuário.
      */
     public int getExitWaitTime() {
@@ -108,12 +118,20 @@ public class Boat implements Runnable{
 
     /**
      * Método que define o tempo que o barco fica à espera de sair do estuário.
+     *
      * @param exitWaitTime tempo que o barco fica à espera de sair do estuário.
      */
     public void setExitWaitTime(int exitWaitTime) {
         this.exitWaitTime = exitWaitTime;
     }
-    
 
-    
+    /**
+     * Método que retorna uma string com a descrição do barco
+     *
+     * @return string com a descrição
+     */
+    @Override
+    public String toString() {
+        return "\nNome: " + name + " Acção: " + action + " Chegada: " + arrivalTime + " Duração: " + actionDuration;
+    }
 }

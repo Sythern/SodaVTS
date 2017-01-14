@@ -21,51 +21,52 @@ import java.util.stream.*;
  * @author dmpcr
  */
 public final class FileManager {
-    
+
     //TODO ISTO é para ser um singleton
     //TODO Finish this shit not done yet cuz Rocha is a Scrub
     private static final FileManager fileManager = new FileManager();
     private final ArrayList<String> boatList;
-    
-    private FileManager(){
+
+    private FileManager() {
         boatList = new ArrayList<>();
     }
-    
-    public static FileManager getInstace(){
+
+    public static FileManager getInstace() {
         return fileManager;
     }
-    
-        public ArrayList<Boat> getBoatsFromFile(){
+
+    public ArrayList<Boat> getBoatsFromFile() {
+        //TODO Add correction for empty lines
         ArrayList<Boat> boats = new ArrayList<>();
         readFile();
-        for(String str : boatList){
+        for (String str : boatList) {
             String[] splitStr = str.trim().split("\\s+");
-            boats.add(new Boat(splitStr[0],convertStringTime(splitStr[1]),splitStr[2],convertStringTime(splitStr[3])));
+            boats.add(new Boat(splitStr[0], convertStringTime(splitStr[1]), Action.getEnum(splitStr[2]), convertStringTime(splitStr[3])));
         }
-        return null;
+        return boats;
     }
-    
-    private void readFile(){
-    String fileName = "trafego.txt";
 
-		try(Stream<String> stream = Files.lines(Paths.get(fileName))){
-			boatList.addAll(stream.collect(Collectors.toList()));
-
-		}catch (IOException ex) {
-			Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
-		}
+    private void readFile() {
         
+        String fileName = "trafego.txt";
+
+        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+            boatList.addAll(stream.collect(Collectors.toList()));
+
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    private int convertStringTime(String time){
-        
+
+    private int convertStringTime(String time) {
+
         int[] splitTime = new int[2];
         int i = 0;
-        
-        for(String str : time.split("h")){
+
+        for (String str : time.split("h")) {
             splitTime[i++] = Integer.parseInt(str);
         }
 
-        return (splitTime[0]*60*60)+(splitTime[1]*60);
+        return (splitTime[0] * 60 * 60) + (splitTime[1] * 60);
     }
 }
