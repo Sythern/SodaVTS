@@ -10,7 +10,7 @@ public class Boat implements Runnable{
     private int arrivalTime, actionDuration, buoyWaitTime, bayWaitTime, exitWaitTime;
     private Thread boatT;
     
-    public Boat(String name, Action action, int arrivalTime, int actionDuration){
+    public Boat(String name, int arrivalTime, Action action, int actionDuration){
         this.name = name;
         this.action = action;
         this.arrivalTime = arrivalTime;
