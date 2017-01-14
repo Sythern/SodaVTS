@@ -5,21 +5,22 @@
  */
 package sodavts;
 
+import java.util.*;
+
 /**
  *
  * @author dmpcr
  */
 public class Local {
     
-    //TODO eveything
     private String name;
-    private int boatHistoryCount, currentBoatCount; // não está muito bem feito assim :/ 
-    //o current boats podia ser o numero de barcos numa queue...
-    // vai ser a classe para todos os locais, incluindo a barra
+    private int boatHistoryCount;
+    private Queue<Boat> boatQueue;
+
     public Local(String name){
         this.name = name;
         boatHistoryCount = 0;
-        currentBoatCount = 0;
+        boatQueue = new LinkedList<>();
     }
 
     public String getName() {
@@ -34,15 +35,11 @@ public class Local {
         this.boatHistoryCount = boatHistoryCount;
     }
 
-    public int getCurrentBoatCount() {
-        return currentBoatCount;
-    }
-
-    public void setCurrentBoatCount(int currentBoatCount) {
-        this.currentBoatCount = currentBoatCount;
+    public Queue getQueueA() {
+        return boatQueue;
     }
     
-    // DO eveything here
-    
-    
+    public synchronized void aproach(Boat boatRef) {
+        
+    }
 }
