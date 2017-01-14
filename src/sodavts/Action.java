@@ -48,11 +48,11 @@ public enum Action {
             case MARINA:
                 return "Marina";
             case TERMINAL_C:
-                return "Terminal C";
+                return "TerminalC";
             case TERMINAL_Q:
-                return "Terminal Q";
+                return "TerminalQ";
             case TERMINAL_P:
-                return "Terminal P";
+                return "TerminalP";
             case PASSEIO:
                 return "Passeio";
             case MAR:

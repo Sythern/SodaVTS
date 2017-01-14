@@ -5,6 +5,7 @@
  */
 package sodavts;
 
+import java.util.*;
 /**
  *
  * @author dmpcr
@@ -17,8 +18,19 @@ public class SodaVTS {
     public static void main(String[] args) {
         // Aqui fica a criação dos barcos e a gestão dos barcos que 
         // estão na bacia e os que entram primeiro
+        
+        //Obtem os barcos
         FileManager fm = FileManager.getInstace();
-        fm.getBoatsFromFile().stream().forEach((ahoy) -> {
+        ArrayList<Boat> boats = fm.getBoatsFromFile();
+        
+        //Todos os locais existentes no rio
+        Map<String, Local> sodaMap = new HashMap<>();
+        sodaMap.put("Barra", new Local("Barra"));
+        for(Action act : Action.values()){
+            sodaMap.put(act.toString(), new Local(act.toString()));
+        }
+
+        boats.stream().forEach((ahoy) -> {
             System.out.println(ahoy);
         });
     }
