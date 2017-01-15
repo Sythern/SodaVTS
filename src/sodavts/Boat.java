@@ -21,7 +21,6 @@ public class Boat implements Runnable {
         this.buoyWaitTime = 0;
         this.exitWaitTime = 0;
         this.boatT = new Thread();
-
     }
 
     //Coment this
@@ -32,7 +31,7 @@ public class Boat implements Runnable {
     //Coment this
     @Override
     public void run() {
-
+        //Dependendo da acção chama-se um local, ?? Apagar action? o local é que importa? precisa de saber um local?
     }
 
     /**
