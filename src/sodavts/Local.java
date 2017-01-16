@@ -15,7 +15,7 @@ public class Local {
     
     private String name;
     private int boatHistoryCount;
-    private Queue<Boat> boatQueue;
+    private Queue<Boat> boatQueue; // isto serve para ver se estar um barco no local ou não, para não chamar o metodo aproach
 
     public Local(String name){
         this.name = name;
@@ -43,7 +43,7 @@ public class Local {
      * Método que faz a gestão das threads (barcos) quando estes entram
      * @param boatRef Referencia da thread
      */
-    public synchronized void aproach(Boat boatRef) {
+    public synchronized void approach(Boat boatRef) {
         
     }
 }

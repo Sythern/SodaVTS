@@ -31,12 +31,13 @@ public class Boat implements Runnable {
     //Coment this
     @Override
     public void run() {
-        //Dependendo da acção chama-se um local, ?? Apagar action? o local é que importa? precisa de saber um local?
+        //Dependendo da acção chama-se um local
+        // Criar uma classe com o map onde os barcos podem pedir a localização do destino
     }
 
     /**
      * Método que retorna a hora de início da ação de um barco.
-     *
+     * 
      * @return hora de inicio da ação do barco.
      */
     public int getArrivalTime() {
