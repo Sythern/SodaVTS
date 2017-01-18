@@ -45,7 +45,7 @@ public class Boat implements Runnable {
             
             Local checkpointBacia = mari.getLocal(Action.BACIA);
             if (!checkpointBacia.isFull()) {
-                
+                checkpointBacia.approach(this);
             }else {
                 //
             }
