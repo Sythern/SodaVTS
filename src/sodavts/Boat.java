@@ -40,14 +40,17 @@ public class Boat implements Runnable {
         //Dependendo da acção chama-se um local
         //Criar uma classe com o map onde os barcos podem pedir a localização do destino
         Maritime mari = Maritime.getInstance();
-        Local local = mari.getLocal(action);
-        /*if (local.isFull()) {
-            local = mari.getLocal(Action.BACIA);
-            while (local.isFull()) {
-
+        Local destination = mari.getLocal(action);
+        if (destination.isFull()) {
+            
+            Local checkpointBacia = mari.getLocal(Action.BACIA);
+            if (!checkpointBacia.isFull()) {
+                
+            }else {
+                //
             }
-        }*/
-        local.approach(this);
+        }
+        destination.approach(this);
     }
 
     public String getName() {
