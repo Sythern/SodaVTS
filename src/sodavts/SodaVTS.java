@@ -6,6 +6,9 @@
 package sodavts;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dmpcr
@@ -16,24 +19,26 @@ public class SodaVTS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         //Obtem os barcos
-        FileManager fm = FileManager.getInstace();
+        FileManager fm = FileManager.getInstance();
         ArrayList<Boat> boats = fm.getBoatsFromFile();
-        
-        //Todos os locais existentes no rio
-        Map<String, Local> sodaMap = new HashMap<>();
-        sodaMap.put("Barra", new Local("Barra"));
-        for(Action act : Action.values()){
-            sodaMap.put(act.toString(), new Local(act.toString()));
+
+        for (int i = 0; i < boats.size(); i++) {
+            boats.get(i).startThread();
+            if (i != boats.size() - 1) {
+                try {
+                    Thread.sleep((boats.get(i + 1).getArrivalTime() - boats.get(i).getArrivalTime()) * 1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SodaVTS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
 
         boats.stream().forEach((ahoy) -> {
             System.out.println(ahoy);
         });
-        
-        
-        
+
     }
-    
+
 }

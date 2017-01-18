@@ -25,13 +25,13 @@ public final class FileManager {
         boatList = new ArrayList<>();
     }
 
-    public static FileManager getInstace() {
+    public static FileManager getInstance() {
         return fileManager;
     }
 
     /**
-     * Método que lê um ficheiro com informações dos barcos
-     * e devolve uma Lista de Barcos
+     * Método que lê um ficheiro com informações dos barcos e devolve uma Lista de Barcos
+     *
      * @return Lista de Barcos
      */
     public ArrayList<Boat> getBoatsFromFile() {
@@ -44,12 +44,12 @@ public final class FileManager {
         }
         return boats;
     }
-    
+
     /**
      * Método auxiliar que lê o ficheiro com informações dos barcos
      */
     private void readFile() {
-        
+
         String fileName = "trafego.txt";
 
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
@@ -62,6 +62,7 @@ public final class FileManager {
 
     /**
      * Método auxiliar que transforma a string com as horas para a escala de tempo da simulação
+     *
      * @return tempo convertido
      */
     private int convertStringTime(String time) {
@@ -73,6 +74,6 @@ public final class FileManager {
             splitTime[i++] = Integer.parseInt(str);
         }
 
-        return ((splitTime[0] * 60) + (splitTime[1]))/10;
+        return ((splitTime[0] * 60) + (splitTime[1])) / 10;
     }
 }

@@ -20,24 +20,51 @@ public class Boat implements Runnable {
         this.bayWaitTime = 0;
         this.buoyWaitTime = 0;
         this.exitWaitTime = 0;
-        this.boatT = new Thread();
+        this.boatT = new Thread(this, name);
     }
 
-    //Coment this
+    /**
+     * Método que ....
+     *
+     */
     public void startThread() {
         boatT.start();
     }
 
-    //Coment this
+    /**
+     * Método que ....
+     *
+     */
     @Override
     public void run() {
         //Dependendo da acção chama-se um local
-        // Criar uma classe com o map onde os barcos podem pedir a localização do destino
+        //Criar uma classe com o map onde os barcos podem pedir a localização do destino
+        Maritime mari = Maritime.getInstance();
+        Local local = mari.getLocal(action);
+        /*if (local.isFull()) {
+            local = mari.getLocal(Action.BACIA);
+            while (local.isFull()) {
+
+            }
+        }*/
+        local.approach(this);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Thread getBoatT() {
+        return boatT;
     }
 
     /**
      * Método que retorna a hora de início da ação de um barco.
-     * 
+     *
      * @return hora de inicio da ação do barco.
      */
     public int getArrivalTime() {
