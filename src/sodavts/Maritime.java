@@ -31,7 +31,7 @@ public final class Maritime {
         for (Action act : Action.values()) {
             switch (act.toString()) {
                 case "Boia":
-                    //sodaMap.put(act.toString(), new Boia(act.toString(), -1));
+                    sodaMap.put(act.toString(), new Boia(act.toString(), -1));
                     break;
                 case "Marina":
                     sodaMap.put(act.toString(), new Marina(act.toString(), -1));
@@ -63,7 +63,7 @@ public final class Maritime {
         return sodaMap;
     }
 
-    public Local getLocal(Action local) {
-        return sodaMap.get(local.toString());
+    public Local getLocal(String local) {
+        return sodaMap.get(local);
     }
 }

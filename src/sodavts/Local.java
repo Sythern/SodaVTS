@@ -16,12 +16,13 @@ import java.util.logging.Logger;
 public abstract class Local {
 
     private String name;
-    private int boatHistoryCount, maxBoats;
+    private int boatHistoryCount, maxBoats, occupied;
     private ArrayList<Boat> boatQueue; // isto serve para ver se estar um barco no local ou não, para não chamar o metodo aproach
 
     public Local(String name, int maxBoats) {
         this.name = name;
         boatHistoryCount = 0;
+        this.occupied = 0;
         this.maxBoats = maxBoats;
         boatQueue = new ArrayList<>();
     }
@@ -42,9 +43,25 @@ public abstract class Local {
         this.boatHistoryCount = boatHistoryCount;
     }
 
-    //Try not to use this
+    public int getOccupied() {
+        return occupied;
+    }
+
+    public synchronized void setOccupied(int occupied) {
+        this.occupied = occupied;
+    }
+    
+
     public ArrayList<Boat> getQueue() {
         return boatQueue;
+    }
+    
+    public synchronized void addBoat(Boat boat){
+        boatQueue.add(boat);
+    }
+    
+    public synchronized void removeBoat(Boat boat){
+        boatQueue.remove(boat);
     }
 
     public boolean isFull() {

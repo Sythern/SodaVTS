@@ -35,9 +35,9 @@ public class SodaVTS {
             }
         }
 
-        boats.stream().forEach((ahoy) -> {
+        /*boats.stream().forEach((ahoy) -> {
             System.out.println(ahoy);
-        });
+        });*/
 
     }
 

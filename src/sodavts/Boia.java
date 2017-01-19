@@ -9,9 +9,9 @@ package sodavts;
  *
  * @author Diogo
  */
-public class Marina extends Local {
+public class Boia extends Local {
 
-    public Marina(String name, int maxBoats) {
+    public Boia(String name, int maxBoats) {
         super(name, maxBoats);
     }
 

@@ -21,11 +21,13 @@ public class Terminal extends Local {
     @Override
     public synchronized void approach(Boat boatRef) {
         try {
-            System.out.println(boatRef.getName() + " Enter");
+            System.out.println(boatRef.getName() + " docked at: " + getName() + "\n");
+            super.addBoat(boatRef);
             wait(boatRef.getActionDuration() * 1000);
+            super.removeBoat(boatRef);
         } catch (InterruptedException ex) {
             Logger.getLogger(Local.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(boatRef.getName() + " Exit");
+        System.out.println(boatRef.getName() + " undoked from: " + getName() + "\n");
     }
 }

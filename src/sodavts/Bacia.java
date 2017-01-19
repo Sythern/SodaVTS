@@ -5,6 +5,9 @@
  */
 package sodavts;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Diogo
@@ -17,6 +20,34 @@ public class Bacia extends Local {
 
     @Override
     public void approach(Boat boatRef) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //recebo meto em pausa e vou vendo todos
+        //se há um barco a ir para o mesmo sitio com uma prioridade maior
+        super.getQueue().add(boatRef);
+        System.out.println(boatRef.getName() + " waiting at: " + getName() + "\n");
+    }
+
+    public synchronized int checkOpening(Boat boatRef, int mode) {
+        switch (mode) {
+            case 0:
+                int i = 1;
+                int ind = getQueue().indexOf(boatRef);
+                
+                //FIX THIS
+                for (Boat b : getQueue()) {
+                    
+                    int queuePosition = getQueue().indexOf(b);
+                    if (!(b.getDestination().equals(boatRef.getDestination()) && queuePosition < ind && !b.equals(boatRef))) {
+                        i = 0;
+                    }
+                }
+                return i;
+            case 1:
+                approach(boatRef);
+                break;
+            case 2:
+                removeBoat(boatRef);
+                break;
+        }
+        return 0;
     }
 }

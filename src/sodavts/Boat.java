@@ -1,5 +1,8 @@
 package sodavts;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Classe que caracteriza um barco da aplicação.
  *
@@ -9,8 +12,10 @@ public class Boat implements Runnable {
 
     private String name;
     private Action action;
-    private int arrivalTime, actionDuration, buoyWaitTime, bayWaitTime, exitWaitTime;
+    private int arrivalTime, actionDuration, buoyWaitTime, bayWaitTime, exitWaitTime, ocupied;
     private Thread boatT;
+    private Maritime mari;
+    private Local destination;
 
     public Boat(String name, int arrivalTime, Action action, int actionDuration) {
         this.name = name;
@@ -20,7 +25,10 @@ public class Boat implements Runnable {
         this.bayWaitTime = 0;
         this.buoyWaitTime = 0;
         this.exitWaitTime = 0;
+        this.ocupied = 0;
         this.boatT = new Thread(this, name);
+        this.mari = Maritime.getInstance();
+        this.destination = mari.getLocal(action.toString());
     }
 
     /**
@@ -39,18 +47,25 @@ public class Boat implements Runnable {
     public void run() {
         //Dependendo da acção chama-se um local
         //Criar uma classe com o map onde os barcos podem pedir a localização do destino
-        Maritime mari = Maritime.getInstance();
-        Local destination = mari.getLocal(action);
         if (destination.isFull()) {
-            
-            Local checkpointBacia = mari.getLocal(Action.BACIA);
-            if (!checkpointBacia.isFull()) {
-                checkpointBacia.approach(this);
-            }else {
-                //
+
+            Bacia checkpoint = (Bacia) mari.getLocal(Action.BACIA.toString());
+            if (!checkpoint.isFull()) {
+                checkpoint.checkOpening(this, 1);
+                int i = 1;
+                while (destination.isFull() || i == 1) {
+                    i = checkpoint.checkOpening(this, 0);
+                }
+                checkpoint.checkOpening(this, 2);
+                //System.out.println(getName() + " is no longer waiting at: " + checkpoint.getName() + "\n");
+                destination.approach(this);
+            } else {
+                //checkpoint = mari.getLocal("Boia");
+                //checkpoint.approach(this);
             }
+        } else {
+            destination.approach(this);
         }
-        destination.approach(this);
     }
 
     public String getName() {
@@ -64,6 +79,51 @@ public class Boat implements Runnable {
     public Thread getBoatT() {
         return boatT;
     }
+
+    public Local getDestination() {
+        return destination;
+    }
+
+    /*private synchronized int checkOpening(Local checkpoint, int mode) {
+        switch (mode) {
+            case 0:
+                while (checkpoint.getOccupied() == 1) {
+                    try {
+                        wait();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Boat.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                checkpoint.setOccupied(1);
+                int i = 0;
+                int ind = checkpoint.getQueue().indexOf(this);
+
+                for (Boat b : checkpoint.getQueue()) {
+                    int p = checkpoint.getQueue().indexOf(b);
+                    if (b.getDestination().equals(getDestination()) && p < ind && !b.equals(this)) {
+                        i = 0;
+                    } else {
+                        i = 1;
+                    }
+                }
+                checkpoint.setOccupied(0);
+                notifyAll();
+                return i;
+            case 1:
+                checkpoint.setOccupied(1);
+                checkpoint.approach(this);
+                checkpoint.setOccupied(0);
+                notifyAll();
+                break;
+            case 2:
+                checkpoint.setOccupied(1);
+                checkpoint.removeBoat(this);
+                checkpoint.setOccupied(0);
+                notifyAll();
+                break;
+        }
+        return 0;
+    }*/
 
     /**
      * Método que retorna a hora de início da ação de um barco.

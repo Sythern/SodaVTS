@@ -17,6 +17,6 @@ public class Passeio extends Local {
 
     @Override
     public void approach(Boat boatRef) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
