@@ -17,6 +17,37 @@ public class Boia extends Local {
 
     @Override
     public void approach(Boat boatRef) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super.getQueue().add(boatRef);
+        System.out.println(boatRef.getName() + " waiting at: " + getName() + "\n");
+    }
+    
+    public synchronized int checkOpening(Boat boatRef, int mode) {
+        synchronized (this) {
+            switch (mode) {
+                case 0:
+                    int i = 0;
+                    int index = getQueue().indexOf(boatRef);
+                    int queuePosition;
+                    String bStr,
+                     boatStr;
+                    //FIX THIS
+                    for (Boat b : getQueue()) {
+                        bStr = b.getDestination().getName();
+                        boatStr = boatRef.getDestination().getName();
+                        queuePosition = getQueue().indexOf(b);
+                        if (bStr.equals(boatStr) && queuePosition < index) {
+                            i = 1;
+                        }
+                    }
+                    return i;
+                case 1:
+                    approach(boatRef);
+                    break;
+                case 2:
+                    removeBoat(boatRef);
+                    break;
+            }
+            return 0;
+        }
     }
 }

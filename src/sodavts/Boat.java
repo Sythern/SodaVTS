@@ -48,21 +48,7 @@ public class Boat implements Runnable {
         //Dependendo da acção chama-se um local
         //Criar uma classe com o map onde os barcos podem pedir a localização do destino
         if (destination.isFull()) {
-
-            Bacia checkpoint = (Bacia) mari.getLocal(Action.BACIA.toString());
-            if (!checkpoint.isFull()) {
-                checkpoint.checkOpening(this, 1);
-                int i = 1;
-                while (destination.isFull() || i == 1) {
-                    i = checkpoint.checkOpening(this, 0);
-                }
-                checkpoint.checkOpening(this, 2);
-                //System.out.println(getName() + " is no longer waiting at: " + checkpoint.getName() + "\n");
-                destination.approach(this);
-            } else {
-                //checkpoint = mari.getLocal("Boia");
-                //checkpoint.approach(this);
-            }
+            enterBacia();
         } else {
             destination.approach(this);
         }
@@ -84,47 +70,32 @@ public class Boat implements Runnable {
         return destination;
     }
 
-    /*private synchronized int checkOpening(Local checkpoint, int mode) {
-        switch (mode) {
-            case 0:
-                while (checkpoint.getOccupied() == 1) {
-                    try {
-                        wait();
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Boat.class.getName()).log(Level.SEVERE, null, ex);
+    private boolean enterBacia(){
+        Bacia checkpoint = (Bacia) mari.getLocal(Action.BACIA.toString());
+            if (!checkpoint.isFull()) {
+                checkpoint.checkOpening(this, 1);
+                int i = 1;
+                while (destination.isFull() || i == 1) {
+                    i = checkpoint.checkOpening(this, 0);
+                    if (i == 1) {
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Boat.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
-                checkpoint.setOccupied(1);
-                int i = 0;
-                int ind = checkpoint.getQueue().indexOf(this);
-
-                for (Boat b : checkpoint.getQueue()) {
-                    int p = checkpoint.getQueue().indexOf(b);
-                    if (b.getDestination().equals(getDestination()) && p < ind && !b.equals(this)) {
-                        i = 0;
-                    } else {
-                        i = 1;
-                    }
-                }
-                checkpoint.setOccupied(0);
-                notifyAll();
-                return i;
-            case 1:
-                checkpoint.setOccupied(1);
-                checkpoint.approach(this);
-                checkpoint.setOccupied(0);
-                notifyAll();
-                break;
-            case 2:
-                checkpoint.setOccupied(1);
-                checkpoint.removeBoat(this);
-                checkpoint.setOccupied(0);
-                notifyAll();
-                break;
-        }
-        return 0;
-    }*/
-
+                checkpoint.checkOpening(this, 2);
+                System.out.println(getName() + " is no longer waiting at: " + checkpoint.getName() + "\n");
+                //Isto é chamado... 
+                destination.approach(this);
+            } else {
+                Boia checkpointB = (Boia) mari.getLocal("Boia");
+                checkpointB.approach(this);
+                return false;
+            }
+            return false;
+    }
     /**
      * Método que retorna a hora de início da ação de um barco.
      *

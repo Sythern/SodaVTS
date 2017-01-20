@@ -27,27 +27,32 @@ public class Bacia extends Local {
     }
 
     public synchronized int checkOpening(Boat boatRef, int mode) {
-        switch (mode) {
-            case 0:
-                int i = 1;
-                int ind = getQueue().indexOf(boatRef);
-                
-                //FIX THIS
-                for (Boat b : getQueue()) {
-                    
-                    int queuePosition = getQueue().indexOf(b);
-                    if (!(b.getDestination().equals(boatRef.getDestination()) && queuePosition < ind && !b.equals(boatRef))) {
-                        i = 0;
+        synchronized (this) {
+            switch (mode) {
+                case 0:
+                    int i = 0;
+                    int index = getQueue().indexOf(boatRef);
+                    int queuePosition;
+                    String bStr,
+                     boatStr;
+                    //FIX THIS
+                    for (Boat b : getQueue()) {
+                        bStr = b.getDestination().getName();
+                        boatStr = boatRef.getDestination().getName();
+                        queuePosition = getQueue().indexOf(b);
+                        if (bStr.equals(boatStr) && queuePosition < index) {
+                            i = 1;
+                        }
                     }
-                }
-                return i;
-            case 1:
-                approach(boatRef);
-                break;
-            case 2:
-                removeBoat(boatRef);
-                break;
+                    return i;
+                case 1:
+                    approach(boatRef);
+                    break;
+                case 2:
+                    removeBoat(boatRef);
+                    break;
+            }
+            return 0;
         }
-        return 0;
     }
 }
