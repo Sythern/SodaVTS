@@ -28,11 +28,9 @@ public final class Maritime {
 
     private void inicializeMap() {
         //Todos os locais existentes no rio
+        sodaMap.put("Boia", new Boia("Boia", -1));
         for (Action act : Action.values()) {
             switch (act.toString()) {
-                case "Boia":
-                    sodaMap.put(act.toString(), new Boia(act.toString(), -1));
-                    break;
                 case "Marina":
                     sodaMap.put(act.toString(), new Marina(act.toString(), -1));
                     break;

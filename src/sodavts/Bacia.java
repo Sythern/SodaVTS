@@ -35,7 +35,6 @@ public class Bacia extends Local {
                     int queuePosition;
                     String bStr,
                      boatStr;
-                    //FIX THIS
                     for (Boat b : getQueue()) {
                         bStr = b.getDestination().getName();
                         boatStr = boatRef.getDestination().getName();
