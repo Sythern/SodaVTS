@@ -6,8 +6,6 @@
 package sodavts;
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +14,8 @@ import java.util.logging.Logger;
 public abstract class Local {
 
     private String name;
-    private int boatHistoryCount, maxBoats, occupied;
+    private int boatHistoryCount, maxBoats;
+    private int occupied;
     private ArrayList<Boat> boatQueue; // isto serve para ver se estar um barco no local ou não, para não chamar o metodo aproach
 
     public Local(String name, int maxBoats) {
@@ -50,17 +49,21 @@ public abstract class Local {
     public synchronized void setOccupied(int occupied) {
         this.occupied = occupied;
     }
-    
+
+    public synchronized void addOccupied(int occupied) {
+        this.occupied += occupied;
+    }
 
     public ArrayList<Boat> getQueue() {
         return boatQueue;
     }
-    
-    public synchronized void addBoat(Boat boat){
+
+    public synchronized void addBoat(Boat boat) {
         boatQueue.add(boat);
+        boatHistoryCount++;
     }
-    
-    public synchronized void removeBoat(Boat boat){
+
+    public synchronized void removeBoat(Boat boat) {
         boatQueue.remove(boat);
     }
 

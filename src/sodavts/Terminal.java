@@ -5,6 +5,7 @@
  */
 package sodavts;
 
+import static java.lang.Math.toIntExact;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,8 +15,14 @@ import java.util.logging.Logger;
  */
 public class Terminal extends Local {
 
+    private long begin, end;
+    private Maritime mari;
+
     public Terminal(String name, int maxBoats) {
         super(name, maxBoats);
+        mari = Maritime.getInstance();
+        begin = 0;
+        end = 0;
     }
 
     @Override
@@ -24,6 +31,11 @@ public class Terminal extends Local {
             System.out.println(boatRef.getName() + " docked at: " + getName() + "\n");
             super.addBoat(boatRef);
             wait(boatRef.getActionDuration() * 1000);
+            Local barra = mari.getLocal("Barra");
+            begin = System.currentTimeMillis();
+            barra.approach(boatRef);
+            end = System.currentTimeMillis();
+            this.addOccupied(toIntExact((end-begin)/1000));
             super.removeBoat(boatRef);
         } catch (InterruptedException ex) {
             Logger.getLogger(Local.class.getName()).log(Level.SEVERE, null, ex);

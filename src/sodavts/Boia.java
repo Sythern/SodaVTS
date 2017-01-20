@@ -18,7 +18,7 @@ public class Boia extends Local {
     @Override
     public void approach(Boat boatRef) {
         super.getQueue().add(boatRef);
-        System.out.println(boatRef.getName() + " waiting at: " + getName() + "\n");
+        System.out.println(boatRef.getName() + " is waiting at: " + getName() + "\n");
     }
 
     public synchronized int checkOpening(Boat boatRef, int mode) {
@@ -44,6 +44,7 @@ public class Boia extends Local {
                     break;
                 case 2:
                     removeBoat(boatRef);
+                    System.out.println(getName() + " is no longer waiting at: " + getName() + "\n");
                     break;
             }
             return 0;

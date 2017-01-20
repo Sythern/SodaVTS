@@ -5,9 +5,6 @@
  */
 package sodavts;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Diogo
@@ -20,10 +17,8 @@ public class Bacia extends Local {
 
     @Override
     public void approach(Boat boatRef) {
-        //recebo meto em pausa e vou vendo todos
-        //se há um barco a ir para o mesmo sitio com uma prioridade maior
         super.getQueue().add(boatRef);
-        System.out.println(boatRef.getName() + " waiting at: " + getName() + "\n");
+        System.out.println(boatRef.getName() + " is waiting at: " + getName() + "\n");
     }
 
     public synchronized int checkOpening(Boat boatRef, int mode) {
@@ -49,6 +44,7 @@ public class Bacia extends Local {
                     break;
                 case 2:
                     removeBoat(boatRef);
+                    System.out.println(boatRef.getName() + " is no longer waiting at: " + getName() + "\n");
                     break;
             }
             return 0;

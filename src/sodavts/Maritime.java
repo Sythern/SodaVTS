@@ -29,6 +29,7 @@ public final class Maritime {
     private void inicializeMap() {
         //Todos os locais existentes no rio
         sodaMap.put("Boia", new Boia("Boia", -1));
+        sodaMap.put("Barra", new Barra("Barra", 1));
         for (Action act : Action.values()) {
             switch (act.toString()) {
                 case "Marina":
@@ -39,9 +40,6 @@ public final class Maritime {
                     break;
                 case "Mar":
                     sodaMap.put(act.toString(), new Mar(act.toString(), -1));
-                    break;
-                case "Barra":
-                    sodaMap.put(act.toString(), new Barra(act.toString(), 1));
                     break;
                 case "TerminalC":
                 case "TerminalQ":

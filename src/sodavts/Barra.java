@@ -5,6 +5,9 @@
  */
 package sodavts;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Diogo
@@ -17,7 +20,13 @@ public class Barra extends Local {
 
     @Override
     public synchronized void approach(Boat boatRef) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            super.addBoat(boatRef);
+            Thread.sleep(1000);
+            super.removeBoat(boatRef);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Local.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
 }

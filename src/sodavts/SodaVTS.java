@@ -24,6 +24,7 @@ public class SodaVTS {
         FileManager fm = FileManager.getInstance();
         ArrayList<Boat> boats = fm.getBoatsFromFile();
 
+        //Inicia os barcos de acordo com a hora de chegada
         for (int i = 0; i < boats.size(); i++) {
             boats.get(i).startThread();
             if (i != boats.size() - 1) {
@@ -34,6 +35,8 @@ public class SodaVTS {
                 }
             }
         }
+        
+        
 
         /*boats.stream().forEach((ahoy) -> {
             System.out.println(ahoy);
