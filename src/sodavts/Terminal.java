@@ -20,7 +20,6 @@ public class Terminal extends Local {
 
     public Terminal(String name, int maxBoats) {
         super(name, maxBoats);
-        mari = Maritime.getInstance();
         begin = 0;
         end = 0;
     }
@@ -31,6 +30,7 @@ public class Terminal extends Local {
             System.out.println(boatRef.getName() + " docked at: " + getName() + "\n");
             super.addBoat(boatRef);
             wait(boatRef.getActionDuration() * 1000);
+            mari = Maritime.getInstance();
             Local barra = mari.getLocal("Barra");
             begin = System.currentTimeMillis();
             barra.approach(boatRef);

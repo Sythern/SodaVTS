@@ -18,7 +18,6 @@ public class Marina extends Local {
 
     public Marina(String name, int maxBoats) {
         super(name, maxBoats);
-        mari = Maritime.getInstance();
     }
 
     @Override
@@ -27,6 +26,7 @@ public class Marina extends Local {
             System.out.println(boatRef.getName() + " docked at: " + getName() + "\n");
             super.addBoat(boatRef);
             Thread.sleep(boatRef.getActionDuration() * 1000);
+            mari = Maritime.getInstance();
             Local barra = mari.getLocal("Barra");
             barra.approach(boatRef);
             super.removeBoat(boatRef);

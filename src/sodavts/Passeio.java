@@ -18,7 +18,6 @@ public class Passeio extends Local {
 
     public Passeio(String name, int maxBoats) {
         super(name, maxBoats);
-        mari = Maritime.getInstance();
     }
 
     @Override
@@ -27,6 +26,7 @@ public class Passeio extends Local {
             System.out.println(boatRef.getName() + " is doing: " + getName() + "\n");
             super.addBoat(boatRef);
             Thread.sleep(boatRef.getActionDuration() * 1000);
+            mari = Maritime.getInstance();
             Local barra = mari.getLocal("Barra");
             barra.approach(boatRef);
             super.removeBoat(boatRef);

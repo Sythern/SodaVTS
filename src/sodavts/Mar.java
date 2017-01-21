@@ -18,7 +18,6 @@ public class Mar extends Local {
 
     public Mar(String name, int maxBoats) {
         super(name, maxBoats);
-        mari = Maritime.getInstance();
     }
 
     @Override
@@ -27,12 +26,13 @@ public class Mar extends Local {
             System.out.println(boatRef.getName() + " just started trip to: " + getName() + "\n");
             super.addBoat(boatRef);
             Thread.sleep(boatRef.getActionDuration() * 1000);
+            mari = Maritime.getInstance();
             Local barra = mari.getLocal("Barra");
             barra.approach(boatRef);
             super.removeBoat(boatRef);
         } catch (InterruptedException ex) {
             Logger.getLogger(Local.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(boatRef.getName() + " just go to: " + getName() + "\n");
+        System.out.println(boatRef.getName() + " arrived to: " + getName() + "\n");
     }
 }
